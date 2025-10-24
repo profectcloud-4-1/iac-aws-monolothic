@@ -1,5 +1,10 @@
+# AWS Access Key
 export AWS_ACCESS_KEY_ID="..."
 export AWS_SECRET_ACCESS_KEY="xxx"
 export AWS_DEFAULT_REGION="ap-northeast-2"
+
+# 키파일 경로
 export SSH_KEY_PATH="~/.ssh/keys/goorm_aws.pem"
+
+# public subnet에 위치한 ec2의 새로운 ssh 포트 번호 (기존 22번 포트에서 해당 포트로 변경됩니다.)
 export SSH_NEW_PORT=2222
