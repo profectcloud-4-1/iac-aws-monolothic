@@ -1,0 +1,40 @@
+---
+- name: Configure SSH socket and install nginx
+  hosts: public_main
+  become: yes
+
+  tasks:
+    - name: Validate required variable ssh_new_port
+      assert:
+        that:
+          - ssh_new_port is defined
+          - (ssh_new_port | string) is match('^[0-9]+$')
+          - (ssh_new_port | int) >= 1
+          - (ssh_new_port | int) <= 65535
+        fail_msg: "ssh_new_port가 필요합니다. --extra-vars 'ssh_new_port=<port>' 또는 환경변수 SSH_NEW_PORT로 전달하세요."
+
+    - name: Create override directory for ssh.socket
+      file:
+        path: /etc/systemd/system/ssh.socket.d
+        state: directory
+        mode: "0755"
+
+    - name: Set custom ListenStream for IPv4 only
+      copy:
+        dest: /etc/systemd/system/ssh.socket.d/listen.conf
+        content: |
+          [Socket]
+          ListenStream=
+          ListenStream=0.0.0.0:{{ ssh_new_port }}
+          BindIPv6Only=no
+
+    - name: Reload systemd and restart SSH socket
+      shell: |
+        systemctl daemon-reload
+        systemctl restart ssh.socket
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
