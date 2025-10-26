@@ -22,12 +22,13 @@ if [ ! -f "$KEY_EXPANDED" ]; then
   exit 1
 fi
 
-ROOT="$PROJECT_ROOT/terraform/001_public_main"
+ROOT="$PROJECT_ROOT/terraform"
 
-# 1. ec2 인스턴스 생성
+# terraform 실행
 terraform -chdir="$ROOT" init -input=false
 terraform -chdir="$ROOT" apply -auto-approve
 PUBLIC_IP=$(terraform -chdir="$ROOT" output -raw public_ip)
+PRIVATE_IP=$(terraform -chdir="$ROOT" output -raw private_ip)
 
 echo "Public IP: $PUBLIC_IP"
-
+echo "Private IP: $PRIVATE_IP"
