@@ -11,5 +11,5 @@ if [ -f "$PROJECT_ROOT/.envrc" ]; then
   set +a
 fi
 
-ROOT="$PROJECT_ROOT/terraform/001_public_main"
-terraform -chdir="$ROOT" destroy -target=aws_instance.public_main -auto-approve
+ROOT="$PROJECT_ROOT/terraform"
+terraform -chdir="$ROOT" destroy -auto-approve
