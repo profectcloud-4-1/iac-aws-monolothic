@@ -8,3 +8,6 @@ export SSH_KEY_PATH="~/.ssh/keys/goorm_aws.pem"
 
 # public subnet에 위치한 ec2의 새로운 ssh 포트 번호 (기존 22번 포트에서 해당 포트로 변경됩니다.)
 export SSH_NEW_PORT=2222
+
+# public subnet의 id입니다("subnet-..." 형식의 문자열). ami를 생성하는 과정에서 packer가 이 서브넷 안에 임시 ec2를 생성합니다.
+export PUBLIC_SUBNET_ID="..."

@@ -26,4 +26,6 @@ bash ./script/destroy_public_main.sh
 ## 현재 단계
 
 - public 서브넷에 ec2 인스턴스 생성
-- ssh 포트 변경
+  - packer를 통해 생성한 ami를 기반으로 생성
+  - ssh 포트 변경
+  - nginx 설치
