@@ -25,6 +25,11 @@ bash ./script/destroy_public_main.sh
 
 ## 현재 단계
 
+- packer를 통해 ami 생성
+
+  - public_main: nginx가 설치 및 ssh 포트 변경된 ubuntu 24.04
+  - private_spring: docker가 설치된 ubuntu 24.04
+
 - public 서브넷에 ec2 인스턴스 생성
   - packer를 통해 생성한 ami를 기반으로 생성
   - ssh 포트 변경

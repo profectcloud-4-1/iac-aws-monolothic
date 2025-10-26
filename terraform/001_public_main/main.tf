@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "public_main" {
-  ami           = "ami-09b059859516446f9" # custom ami: nginx 설치, ssh 포트 변경
+  ami           = "ami-03aa7eed9a19f1035" # custom ami: nginx 설치, ssh 포트 변경
   instance_type = "t2.micro"
   key_name      = "goorm_aws"
 
@@ -15,6 +15,9 @@ resource "aws_instance" "public_main" {
   ]
 
   associate_public_ip_address = true
+
+  # 종료 시 동작
+  instance_initiated_shutdown_behavior = "terminate"
 
   root_block_device {
     volume_type           = "gp3"
