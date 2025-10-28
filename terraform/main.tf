@@ -359,6 +359,22 @@ resource "aws_security_group" "private_http" {
   }
 }
 
+# vpc endpoint: private subnect -> s3
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.ap-northeast-2.s3"
+  vpc_endpoint_type = "Gateway"
+
+  route_table_ids = [
+    aws_route_table.private.id
+  ]
+
+  tags = {
+    Name = "s3-gateway-endpoint"
+    project = "goormdotcom"
+  }
+}
+
 # ec2 - public
 resource "aws_instance" "public_main" {
   ami           = "ami-053e0a41207f3dff0" # custom ami: nginx 설치, ssh 포트 변경
